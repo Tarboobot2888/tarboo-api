@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TARBOO API Hub - التسجيل</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="config.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- شاشة التسجيل -->
+  <div class="screen active" id="register">
+    <div class="container">
+      <h2>سجّل حساب جديد</h2>
+      <input id="reg-name" type="text" placeholder="الاسم الكامل" />
+      <input id="reg-email" type="email" placeholder="البريد الإلكتروني" />
+      <input id="reg-password" type="password" placeholder="كلمة المرور" />
+      <button onclick="register()">سجّل الآن</button>
+      <div class="link" onclick="switchScreen('login')">عندك حساب؟ ادخل من هنا</div>
+    </div>
+  </div>
+
+  <script src="register.js"></script>
+</body>
+</html>

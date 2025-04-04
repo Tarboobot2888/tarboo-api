@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TARBOO API Hub - لوحة تحكم المستخدم</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="config.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- واجهة المستخدم بعد تسجيل الدخول -->
+  <div class="screen active" id="dashboard">
+    <div class="container">
+      <h2>مرحبًا بك، <span id="user-name"></span></h2>
+      <p>اختر الخدمة التي تريد استخدامها:</p>
+      
+      <!-- قائمة الخدمات التي يمكن للمستخدم التفاعل معها -->
+      <div class="api-list" id="api-list">
+        <!-- الخدمات ستظهر هنا عبر جافا سكريبت -->
+      </div>
+      
+      <!-- زر لتسجيل الخروج -->
+      <button onclick="logout()">تسجيل الخروج</button>
+    </div>
+  </div>
+
+  <!-- جافا سكريبت الخاص بواجهة المستخدم -->
+  <script>
+    // التحقق من حالة المستخدم
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById('user-name').textContent = user.displayName || 'مستخدم';
+        
+        // إضافة خدمات API هنا حسب الحاجة
+        const apis = [
+          "API الطقس",
+          "API الألعاب",
+          "API الذكاء الاصطناعي",
+          "API الأخبار",
+          "API الموسيقى",
+          "API الترجمة",
+          "API الصور",
+          "API الفيديو",
+          "API العملات",
+          "API الخرائط"
+        ];
+        
+        const apiList = document.getElementById('api-list');
+        apis.forEach(api => {
+          const apiItem = document.createElement('div');
+          apiItem.className = 'api-item';
+          apiItem.textContent = api;
+          apiList.appendChild(apiItem);
+        });
+      } else {
+        window.location.href = 'index.html'; // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن المستخدم قد سجل الدخول
+      }
+    });
+
+    // دالة لتسجيل الخروج
+    function logout() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html'; // إعادة التوجيه إلى صفحة تسجيل الدخول بعد الخروج
+      });
+    }
+  </script>
+</body>
+</html>
